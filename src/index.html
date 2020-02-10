@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>space/time</title>
+  </head>
+  <body class="container">
+    <p id="heading">SPACE TIME</p>
+    <div class="panel panel-default">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Enter your age and select a planet to find out how old you'd be according to their solar year.</h2>
+          <form id="planetage">
+            <div class="form-group">
+              <label for="planet">Select a planet:</label>
+              <select class="form-control" id="planet">
+                <option value="Mercury">Mercury</option>
+                <option value="Venus">Venus</option>
+                <option value="Mars">Mars</option>
+                <option value="Jupiter">Jupiter</option>
+              </select><br>
+              <label for ="age">Enter your age in years:</label>
+              <input type="text" id="age" required>
+            </div>
+            <div class="form-group">
+              <p>Select your demographics to calculate your lifespan:</p>
+              <label for="gender">Gender:</label>
+              <select class="form-control" id="gender">
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+              <label for="race">Race:</label>
+              <select class="form-control" id="race">
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+                <option value="Hispanic">Hispanic</option>
+                <option value="Asian">Asian</option>
+              </select>
+              <label for="education">Highest Education Achieved:</label>
+              <select class="form-control" id="education">
+                <option value="No Highschool">Less than Highschool</option>
+                <option value="Highschool">Highschool</option>
+                <option value="Bachelors">Bachelors Degree or above</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="results-col">
+            <h3><span id="planet-name"></span></h3>
+              <p id="image-placeholder"></p>
+              <p>You're <span id="age-entered"></span> years old on earth, but here you're <span id="planet-age"></span>.</p>
+              <p>Your life expectancy on earth is <span id="earth-expectancy"></span>.</p>
+              <p id="years-left">Here, according to your demographic's average lifespan, you would have <span id="planet-remain"></span> years left to live.</p>
+              <p id="years-over">According to your demographic's average lifespan, it looks like you've lived <span id="planet-over"></span> of this planet's years over your average age lifespan!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
