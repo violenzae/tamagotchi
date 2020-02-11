@@ -23,14 +23,14 @@ export class Tamagotchi {
     setInterval(() => {
       this.happiness--;
       this.boredCheck();
-    }, 4500);
+    }, 1000);
   }
 
   updateStats() {
     setInterval(() => {
       let foodLevel = this.foodLevel;
       let happiness = this.happiness;
-      let poops = this.poops;
+      // let poops = this.poops;
       document.getElementById("food").innerHTML = foodLevel;
       document.getElementById("happiness").innerHTML = happiness;
       // document.getElementById("poops").innerHTML = poops;

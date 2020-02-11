@@ -12,48 +12,38 @@ $(document).ready(function() {
   tamagotchi.setAge();
   tamagotchi.updateStats();
 
-  const url = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=${tamagotchi.name.toLowerCase()}&limit=1&weirdness=2`);
+  const url = $.get(`https://api.giphy.com/v1/gifs/random?api_key=${process.env.API_KEY}&tag=${tamagotchi.name.toLowerCase()}&limit=1&weirdness=10`);
   url.done(function(data) {
     document.getElementById("img-output").src = data.data.images.original.url;
   });
 
-  setInterval(poopTimer, 1000);
 
-  function poopTimer() {
-    $("#poops").empty();
-    const poopStickers = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=poop&limit=1&weirdness=2`);
-    tamagotchi.poops.forEach(function() {
-      poopStickers.done(function(data) {
-        $("#poops").append(`<img src="${data.data.images.original.url}" height="50px">`);
-      });
-    });
-  }
-
-  setInterval(deadFood, 5000);
-
-  function deadFood() {
-    console.log("bad = " + tamagotchi.badPoints + " age = " + tamagotchi.age);
+  function deathEvent() {
     tamagotchi.stats = `<p><em>Food Level: </em>${tamagotchi.foodLevel}</p><br>
     <p><em>Happiness Level: </em>${tamagotchi.happiness}</p><br>
     <p><em>Final Age: </em>${tamagotchi.age}</p><br>
     <p><em>Final Form: </em>${tamagotchi.form}</p><br>
-    <p><em>Death: </em>${tamagotchi.death}</p><br>`; 
+    <p><em>Death: </em>${tamagotchi.death}</p><br>`;
+    $("#stats").html(tamagotchi.stats);
+    $('#myModal').modal('show');
+    for (var i = 1; i < 99999; i++)
+      window.clearInterval(i);
+  }
 
+  setInterval(deadFood, 1000);
+
+  function deadFood() {
     if (tamagotchi.foodLevel < 0) {
-      // alert("starved :(");
       tamagotchi.death = "Starved to death";
-      $("#stats").html(tamagotchi.stats);
-      $('#myModal').modal('show');
+      deathEvent();
     }
     if (tamagotchi.happiness <= -16) {
       tamagotchi.death = "Ran away";
-      $("#stats").html(tamagotchi.stats);
-      $('#myModal').modal('show');
+      deathEvent();
     }
     if (tamagotchi.age === 5) {
       tamagotchi.death = "Old Age";
-      $("#stats").html(tamagotchi.stats);
-      $('#myModal').modal('show');
+      deathEvent();
     }
     if (tamagotchi.age === 1 ) {
       if (tamagotchi.behavior === 0) {
@@ -83,6 +73,19 @@ $(document).ready(function() {
   $("#feed").click(function(event) {
     event.preventDefault();
     tamagotchi.feed();
+    setTimeout(() => {
+      $("#poops").empty();
+      const poopStickers = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=poop&limit=1&weirdness=2`);
+      tamagotchi.poops.forEach(function() {
+        poopStickers.done(function(data) {
+          $("#poops").append(`<img src="${data.data.images.original.url}" height="50px">`);
+        });
+      });
+    }, 1001);
+  });
+
+  $("#close-button").click(function() {
+    document.location.reload(true);
   });
 
   $("#play").click(function(event) {
@@ -93,6 +96,7 @@ $(document).ready(function() {
   $("#clean").click(function(event) {
     event.preventDefault();
     tamagotchi.clean();
+    $("#poops").empty();
   });
 
 });

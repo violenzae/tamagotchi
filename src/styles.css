@@ -9,8 +9,12 @@ body {
     padding-top: 20%;
 }
 
-img {
+#img-output {
     display: block;
     text-align: center;
     margin: auto;
+}
+
+#poops {
+    height: 55px;
 }
