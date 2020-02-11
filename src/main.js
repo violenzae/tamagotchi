@@ -6,47 +6,79 @@ import './styles.css';
 
 $(document).ready(function() {
   let tamagotchi = new Tamagotchi();
-  tamagotchi.name = prompt("What is your pet's name?")
+  tamagotchi.name = prompt("What is your pet's name?");
   tamagotchi.setHunger();
   tamagotchi.setBoredom();
   tamagotchi.setAge();
   tamagotchi.updateStats();
 
+  const url = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=${tamagotchi.name.toLowerCase()}&limit=1&weirdness=2`);
+  url.done(function(data) {
+    document.getElementById("img-output").src = data.data.images.original.url;
+  });
+
+  setInterval(poopTimer, 1000);
+
+  function poopTimer() {
+    $("#poops").empty();
+    const poopStickers = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=poop&limit=1&weirdness=2`);
+    tamagotchi.poops.forEach(function() {
+      poopStickers.done(function(data) {
+        $("#poops").append(`<img src="${data.data.images.original.url}" height="50px">`);
+      });
+    });
+  }
 
   setInterval(deadFood, 5000);
 
   function deadFood() {
     console.log("bad = " + tamagotchi.badPoints + " age = " + tamagotchi.age);
+    tamagotchi.stats = `<p><em>Food Level: </em>${tamagotchi.foodLevel}</p><br>
+    <p><em>Happiness Level: </em>${tamagotchi.happiness}</p><br>
+    <p><em>Final Age: </em>${tamagotchi.age}</p><br>
+    <p><em>Final Form: </em>${tamagotchi.form}</p><br>
+    <p><em>Death: </em>${tamagotchi.death}</p><br>`; 
+
     if (tamagotchi.foodLevel < 0) {
-      alert("starved :(");
+      // alert("starved :(");
+      tamagotchi.death = "Starved to death";
+      $("#stats").html(tamagotchi.stats);
+      $('#myModal').modal('show');
     }
     if (tamagotchi.happiness <= -16) {
-      alert("RAN AWAY");
+      tamagotchi.death = "Ran away";
+      $("#stats").html(tamagotchi.stats);
+      $('#myModal').modal('show');
     }
     if (tamagotchi.age === 5) {
-      alert("died of old age :)");
+      tamagotchi.death = "Old Age";
+      $("#stats").html(tamagotchi.stats);
+      $('#myModal').modal('show');
     }
     if (tamagotchi.age === 1 ) {
       if (tamagotchi.behavior === 0) {
-        console.log("Good child");
+        tamagotchi.form = "Good Child ";
       } else {
-        console.log("Bad Child");
+        tamagotchi.form = "Bad Child ";
       }
     } else if (tamagotchi.age === 2) {
       if (tamagotchi.behavior === 0 ) {
-        console.log("Good Adult");
+        tamagotchi.form = "Good Adult ";
       } else if (tamagotchi.behavior === 1 ) {
-        console.log("Neutral Adult");
+        tamagotchi.form = "Neutral Adult ";
       } else {
-        console.log("Bad Adult");
-      }
+        tamagotchi.form = "Bad Adult ";
+      } 
+    } else if (tamagotchi.age === 4) {
+      $("#old").text("Old ");
     }
+    $("#form").text(tamagotchi.form);
   }
   
 
 
-  $("#name").text(tamagotchi.name);
-
+  $(".name").text(tamagotchi.name);
+  $("#form").text(tamagotchi.form);
 
   $("#feed").click(function(event) {
     event.preventDefault();

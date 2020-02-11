@@ -7,13 +7,29 @@
     <div>
       <div class="panel panel-default">
         <h3>Tamagotchi</h3>
-        <h2 id="name"></h2>
-        <img src="placeholder.png" alt="imgg">
-        <p>Food: <span id="food"></span> --- Happiness: <span id="happiness"></span> Poops: <span id="poops"></span></p>
+        <h2><span id="old"></span><span id="form"></span><span class="name"></span></h2>
+        <img id="img-output" height="250px">
+        <p>Food: <span id="food"></span> --- Happiness: <span id="happiness"></span> </p>Poops: <p id="poops"></p>
         <p id="buttonrow"><button type="button" id="feed" class="btn btn-primary">Feed</button>
         <button type="button" id="play" class="btn btn-primary">Play</button>
         <button type="button" id="clean" class="btn btn-primary">Clean</button></p>
       </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><span class="name"></span>'s Statistics</h4>
+            </div>
+            <div class="modal-body">
+              <div class="col-md-6">
+                <hr>
+                <p id="stats">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close-button">Close</button>
+            </div>
+          </div>
   </body>
 </html>

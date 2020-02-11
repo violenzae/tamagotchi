@@ -4,5 +4,13 @@ body {
 
 .panel {
     text-align: center;
-    margin: 40%;
+    margin: auto;
+    display: block;
+    padding-top: 20%;
+}
+
+img {
+    display: block;
+    text-align: center;
+    margin: auto;
 }

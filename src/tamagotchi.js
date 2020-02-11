@@ -8,6 +8,7 @@ export class Tamagotchi {
     this.poops = [];
     this.age = 0;
     this.behavior = 0;
+    this.form = "Baby "
   }
   setHunger() {
     setInterval(() => {
@@ -32,7 +33,7 @@ export class Tamagotchi {
       let poops = this.poops;
       document.getElementById("food").innerHTML = foodLevel;
       document.getElementById("happiness").innerHTML = happiness;
-      document.getElementById("poops").innerHTML = poops;
+      // document.getElementById("poops").innerHTML = poops;
     }, 1000);
   }
 
@@ -79,6 +80,6 @@ export class Tamagotchi {
   }
 
   clean() {
-    this.poops = 0;
+    this.poops = [];
   }
 }
