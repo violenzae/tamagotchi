@@ -24,6 +24,11 @@ describe('Tamagotchi', () => {
     expect(gotchi.foodLevel).toEqual(9);
   });
 
+  test('should have badPoints of 1 after 45001 milliseconds', () => {
+    jest.advanceTimersByTime(45001);
+    expect(gotchi.badPoints).toEqual(1);
+  });
+
   test('should get very hungry if the food level drops below zero', function() {
     gotchi.foodLevel = 0;
     expect(gotchi.starvedCheck()).toEqual(true);
@@ -76,6 +81,7 @@ describe('Tamagotchi', () => {
   test('should increase age and check points', function() {
     gotchi.setAge();
     jest.advanceTimersByTime(120001);
+    console.log(gotchi.behavior);
     expect(gotchi.age).toEqual(1);
   });
 });
