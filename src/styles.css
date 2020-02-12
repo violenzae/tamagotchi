@@ -1,12 +1,15 @@
 body {
-    text-align: center
+    text-align: center;
+    background-image: url("assets/images/tamashell.jpg");
+    background-repeat: no-repeat;
+    background-size:  100%;
 }
 
 .panel {
     text-align: center;
-    margin: auto;
+    margin-left: auto;
     display: block;
-    padding-top: 20%;
+    margin-top: 40%;
 }
 
 #img-output {

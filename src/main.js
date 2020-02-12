@@ -12,11 +12,10 @@ $(document).ready(function() {
   tamagotchi.setAge();
   tamagotchi.updateStats();
 
-  const url = $.get(`https://api.giphy.com/v1/gifs/random?api_key=${process.env.API_KEY}&tag=${tamagotchi.name.toLowerCase()}&limit=1&weirdness=10`);
+  const url = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=${tamagotchi.name.toLowerCase()}&limit=1&weirdness=10`);
   url.done(function(data) {
     document.getElementById("img-output").src = data.data.images.original.url;
   });
-
 
   function deathEvent() {
     tamagotchi.stats = `<p><em>Food Level: </em>${tamagotchi.foodLevel}</p><br>
@@ -75,7 +74,7 @@ $(document).ready(function() {
     tamagotchi.feed();
     setTimeout(() => {
       $("#poops").empty();
-      const poopStickers = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=poop&limit=1&weirdness=2`);
+      const poopStickers = $.get(`https://api.giphy.com/v1/stickers/random?api_key=${process.env.API_KEY}&tag=poop&limit=1`);
       tamagotchi.poops.forEach(function() {
         poopStickers.done(function(data) {
           $("#poops").append(`<img src="${data.data.images.original.url}" height="50px">`);
